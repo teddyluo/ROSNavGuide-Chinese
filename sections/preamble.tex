@@ -1,0 +1,413 @@
+% !TeX encoding = UTF-8
+% !TeX root = RosNavTuningCn.tex
+% !TeX TS-program = xelatex.exe
+
+% for distanguishing different author emails
+%\makeatletter
+%\newcommand{\ssymbol}[1]{\textsuperscript{\@fnsymbol{#1}}}
+%\makeatother
+
+% math packages
+\usepackage{amsmath, amssymb, amsfonts, mathtools}%fouriernc amsthm, 
+\usepackage{bm, fixmath}% bold math
+\newcommand\defeq{\stackrel{\mathclap{\normalfont\mbox{def}}}{=}}
+
+% figures
+\usepackage{graphicx}
+\graphicspath{{figures/}}
+\usepackage{csquotes}
+
+% set toc depth
+\setcounter{tocdepth}{3}
+\setcounter{secnumdepth}{3}
+
+% highlight texts
+\usepackage{soul}
+\definecolor{lightblue}{rgb}{.90, .95, 1}
+%\sethlcolor{rosepale}
+\sethlcolor{lime}
+
+%% symbols: degree
+\usepackage{siunitx}
+%% customrized label
+\usepackage{enumitem}
+
+\usepackage[toc]{multitoc}
+\renewcommand*{\multicolumntoc}{2}
+\setlength{\columnseprule}{0.5pt}
+
+\usepackage{xcolor}%[dvipsnames]
+% new color
+\definecolor{psychedelicpurple}{rgb}{0.87, 0.0, 1.0}
+\definecolor{formalshade}{rgb}{0.95,0.95,1}
+\definecolor{colorbg}{rgb}{0.92, 0.92, 0.92}
+\definecolor{colorbg2}{rgb}{0.95, 0.95, 0.95}
+\definecolor{darkviolet}{rgb}{0.58, 0.0, 0.83}
+\definecolor{Cyan}{rgb}{0.0, 1.0, 1.0}
+\definecolor{ForestGreen}{rgb}{0.13, 0.55, 0.13}
+
+\definecolor{delim}{RGB}{20,105,176}
+\colorlet{punct}{red!60!black}
+
+% environment
+% for adjustwidth environment
+\usepackage[strict]{changepage}
+\newenvironment{formal}
+{%
+	\def\FrameCommand
+	{%
+		%\hspace{1pt}%
+		{\color{psychedelicpurple}\vrule width 2pt}%
+		{\color{formalshade}\vrule width 4pt}%
+		\colorbox{formalshade}%
+	}%
+	\vspace{-15pt}
+	\MakeFramed{\advance\hsize-\width\FrameRestore}%
+	%\noindent\hspace{-4.55pt}% disable indenting first paragraph
+	\begin{adjustwidth}{}{7pt}%
+		\vspace{2pt}\vspace{2pt}%
+		%\indent
+	}
+	{%
+		\vspace{2pt}
+	\end{adjustwidth}
+	\endMakeFramed%
+}
+\newcommand{\parEnCn}[2]{
+	\par{\indent #1}
+	\begin{formal}
+		\par{~~~~#2}
+	\end{formal}
+	%\vspace{-10pt}
+}
+\newcommand{\parEnCnNoIndent}[2]{
+	\noindent#1
+	\begin{formal}
+		\noindent#2
+	\end{formal}
+	%\vspace{-10pt}
+}
+
+% bib style
+\usepackage[backend=biber,bibstyle=gb7714-2015,%nature,%%加载biblatex宏包，使用参考文献
+citestyle=gb7714-2015,backref=true%%其中后端backend使用biber
+]{biblatex}%标注(引用)样式citestyle，著录样式bibstyle都采用gb7714-2015样式
+
+\usepackage{cleveref}
+\crefname{equation}{式}{式}
+\Crefname{equation}{式}{式}
+\crefname{table}{表}{表}
+\Crefname{table}{表}{表}
+\crefname{figure}{图}{图}
+\Crefname{figure}{图}{图}
+\crefname{inputPrg}{程序}{程序}
+
+\setminted[c++]{%gobble=0, %Remove the first n characters from each input line
+	%escapeinside=||,
+	baselinestretch = 1.0,
+	bgcolor=colorbg2,
+	breaklines, breakanywhere,
+	%showspaces,
+	showtabs,
+	autogobble,
+	mathescape,  
+	%	fontsize=\small, 
+	linenos,
+	stepnumber = 1,
+	%numbersep=5pt, 
+	tabsize=4,%4
+	frame={lines},%lines, %{leftline,topline},%{leftline,topline,bottomline},
+	rulecolor=\color{BurntOrange},%\color{green},%\color{LightRubineRed}, ForestGreen
+	framerule=1pt,
+	%highlightcolor, %default: LightCyan
+	%highlightlines={1, 5-6},
+	%label=main.cpp,
+	%labelposition=all
+	obeytabs=false,
+	mathescape=false
+	samepage=false,
+	showspaces=false,
+	showtabs =false,
+	texcl=false,
+}
+\setmintedinline[c++]{
+	breaklines,
+	breakanywhere,
+	bgcolor=lightblue, %colorbgdark,%showspaces,
+	autogobble,
+	%fontsize=\normalsize,
+	%frame=none,
+	%framerule=0pt,
+}
+
+%\newtcblisting{bashcode}{
+%	listing engine=minted,
+%	colback=colorbg,
+%	colframe=black!70,
+%	listing only,
+%	minted style=colorful,
+%	minted language=bash,
+%	minted options={linenos=true,texcl=true},
+%	left=1mm,	
+%}
+
+\setminted[bash]{
+	%	fontsize=\small, 
+	baselinestretch = 1.1,
+	bgcolor=colorbg2,
+	breaklines, breakanywhere,
+	breaksymbolleft={},
+	%	breakanywheresymbolpre={},
+	fontfamily=tt,
+	linenos=true,
+	numberblanklines=true,
+	numbersep=5pt,
+	autogobble,
+	frame=leftline,
+	rulecolor=\color{darkviolet},
+	framesep=2mm,
+	framerule=2pt,
+	tabsize=4,
+	obeytabs=false,
+	mathescape=false
+	samepage=false,
+	showspaces=false,
+	showtabs =false,
+	texcl=false,
+	breaklines=true,
+}
+
+%\definecolor{aquamarine}{rgb}{0.5, 1.0, 0.83}
+%\definecolor{beaublue}{rgb}{0.74, 0.83, 0.9}
+%\definecolor{springbud}{rgb}{0.65, 0.99, 0.0}% good, but repeat with hl-color
+%\definecolor{purplex11}{rgb}{0.63, 0.36, 0.94}
+\definecolor{magenta}{rgb}{1.0, 0.0, 1.0}
+\setmintedinline[bash]{
+	breaklines,
+	breakanywhere,
+	bgcolor=magenta!10, %colorbgdark,%showspaces,
+	autogobble,
+	%	fontsize=\normalsize,
+	%frame=none,
+	%framerule=0pt,
+}
+
+\setminted[xml]{bgcolor=colorbg, 
+	%	fontsize=\small, 
+	linenos, 
+	xleftmargin=8pt,
+	breaklines=true,
+	frame=leftline,
+	rulecolor=\color{darkviolet},
+	framesep=2mm,
+	framerule=2pt,
+	breaksymbolleft={},
+}
+\setmintedinline[xml]{
+	bgcolor=colorbg, 
+	%fontsize=\small, 
+	bgcolor=lightblue,
+	autogobble,
+}
+
+\setminted[python]{%gobble=0, %Remove the first n characters from each input line
+	%escapeinside=||,
+	baselinestretch = 1.0,
+	bgcolor=colorbg,
+	breaklines, breakanywhere,
+	breaksymbolleft={},
+	%showspaces,
+	showtabs,
+	autogobble,
+	mathescape,  
+	%fontsize=\normalsize, 
+	linenos,
+	stepnumber = 1,
+	%numbersep=5pt, 
+	tabsize=4,%4
+	frame={lines},%lines, %{leftline,topline},%{leftline,topline,bottomline},
+	rulecolor=\color{darkviolet},%\color{green},%\color{LightRubineRed}, ForestGreen
+	framerule=1pt,
+	%highlightcolor, %default: LightCyan
+	%highlightlines={1, 5-6},
+	%label=main.cpp,
+	%labelposition=all
+}
+\setmintedinline[python]{
+	bgcolor=colorbg, 
+	%fontsize=\normalsize, 
+	bgcolor=lightblue,
+	autogobble,
+}
+
+\setminted[lua]{%gobble=0, %Remove the first n characters from each input line
+	%escapeinside=||,
+	baselinestretch = 1.1,
+	bgcolor=colorbg2,
+	breaklines, 
+	breakanywhere,
+	breaksymbolleft={},
+	%showspaces,
+	%showtabs,
+	autogobble,
+	mathescape,  
+	%fontsize=\normalsize, 
+	linenos,
+	stepnumber = 1,
+	%numbersep=5pt, 
+	tabsize=4,%4
+	frame=lines,%{leftline,topline,bottomline},
+	rulecolor=\color{Orange},%\color{green},%\color{LightRubineRed}, ForestGreen
+	framerule=2pt,
+	%highlightcolor, %default: LightCyan
+	%highlightlines={1, 5-6},
+	%label=main.cpp,
+	%labelposition=all
+}
+
+\setminted[xml]{%gobble=0, %Remove the first n characters from each input line
+	%escapeinside=||,
+	baselinestretch = 1.1,
+	bgcolor=colorbg2,
+	breaklines, 
+	breakanywhere,
+	breaksymbolleft={},
+	%showspaces,
+	%showtabs,
+	autogobble,
+	mathescape,  
+	%fontsize=\normalsize, 
+	linenos,
+	stepnumber = 1,
+	%numbersep=5pt, 
+	tabsize=4,%4
+	frame=lines,%{leftline,topline,bottomline},
+	rulecolor=\color{ForestGreen},%\color{green},%\color{LightRubineRed}, Cyan 
+	framerule=2pt,
+	mathescape=false,
+	%highlightcolor, %default: LightCyan
+	%highlightlines={1, 5-6},
+	%label=main.cpp,
+	%labelposition=all
+}
+
+\lstdefinelanguage{json}{
+	basicstyle=\normalfont\ttfamily,
+	numbers=left,
+	numberstyle=\scriptsize,
+	stepnumber=1,
+	numbersep=8pt,
+	showstringspaces=false,
+	breaklines=true,
+	frame=lines,
+	backgroundcolor=\color{colorbg},
+	literate=
+	*{:}{{{\color{punct}{:}}}}{1}
+	{,}{{{\color{punct}{,}}}}{1}
+	{\{}{{{\color{delim}{\{}}}}{1}
+	{\}}{{{\color{delim}{\}}}}}{1}
+	{[}{{{\color{delim}{[}}}}{1}
+	{]}{{{\color{delim}{]}}}}{1},
+}
+
+
+%%============= for highlight Chinese texts =============%% 
+% http://latexcolor.com/
+\definecolor{neongreen}{rgb}{0.22, 0.88, 0.08}
+
+\newcommand*{\cjkhl}[2]{{\def\xcjklhcolorbox{\colorbox{#1}}\xcjkhl#2\relax}}
+\newcommand{\CJKNhl}[1]{
+	\cjkhl{lime}{#1}%neongreen
+}
+
+\makeatletter
+
+%look ahhead for the next character
+\def\xcjkhl{\futurelet\tmp\xxcjkhl}
+
+%helper macro to make leaders with a highlight box.
+\def\xcjkhlleaders{\leavevmode\leaders\hbox{%
+		\fboxsep\z@\xcjklhcolorbox{\strut\kern.1pt%
+			\ifx\cjkhlbleeda\relax\else\kern\cjkhlbleeda\fi\relax}%
+		\ifx\cjkhlbleeda\relax\else\kern-\cjkhlbleeda\fi\relax}}
+
+% leaders with a 1pt of stretch/shrink to put before or after punctuation
+\def\@@yhlstretch{\leavevmode\xcjkhlleaders\hskip\z@\@plus.1em \@minus.1em }
+
+\def\@chkhlpar#1\fi\fi#2{\par\noindent\xcjkhl}
+
+\def\@cjkhl@beforeafter#1{%
+	\ifx\tmp#1%
+	\@@yhlstretch
+	\let\@chkhlstretch\@@yhlstretch
+	\let\cjkhlpenalty\@highpenalty
+	\fi}
+
+\def\@cjkhl@after#1{%
+	\ifx\tmp#1%
+	\let\@chkhlstretch\@@yhlstretch
+	\let\cjkhlpenalty\@highpenalty
+	\fi}
+
+\def\@cjkhl@before#1{%
+	\ifx\tmp#1%
+	\@@yhlstretch
+	\let\cjkhlpenalty\@highpenalty
+	\fi}
+
+\def\xxcjkhl{%
+	%look for a \par (from \obeylines)
+	\ifx\tmp\par\expandafter\@chkhlpar\fi
+	%look for a \relax to finish
+	\ifx\tmp\relax
+	\else
+	%by default do no stretch leaders after the character
+	\let\@chkhlstretch\relax
+	\let\cjkhlpenalty\z@
+	%these stretch before and after
+	\@cjkhl@beforeafter？%
+	\@cjkhl@beforeafter；%
+	% these stretch after
+	\@cjkhl@after，%
+	\@cjkhl@after。%
+	\@cjkhl@after）%
+	\@cjkhl@after》%
+	\@cjkhl@after”%
+	%these stretch before
+	\@cjkhl@before（%
+	\@cjkhl@before《%
+	\@cjkhl@before“%
+	% look for a space
+	\ifx\tmp\@sptoken
+	\xxxcjkhlsp
+	\else
+	%default case stick the current character in a box
+	\xxxcjkhl
+	\fi\fi}
+
+%make a highlight leaders stretch/shrink as much as a normal word space.
+\def\xxxcjkhlsp#1\fi\fi#2{%
+	\fi\fi
+	\xcjkhlleaders\hskip \fontdimen2\font  plus \fontdimen3\font minus \fontdimen4\font\relax
+	\xcjkhl#2}
+
+%get out of a double \if test
+\def\xxxcjkhl\fi\fi{%
+	\fi\fi
+	\@chkhl}
+
+%The simple case box the current character and start looking for the next.
+% bleed slightly on the right to avoid gaps showing
+\let\cjkhlbleeda\relax
+\def\cjkhlbleeda{.07pt}
+\def\@chkhl#1{{%
+		\fboxsep\z@
+		\leavevmode\penalty\cjkhlpenalty
+		\xcjklhcolorbox{%
+			\strut#1\ifx\cjkhlbleeda\relax\else\kern\cjkhlbleeda\fi}}%
+	\ifx\cjkhlbleeda\relax\else\kern-\cjkhlbleeda\fi\relax
+	\@chkhlstretch
+	\xcjkhl}%
+
+\makeatother
+%%============= for highlight Chinese texts =============%% 
