@@ -1,10 +1,11 @@
-# ROSNavGuide-Chinese： 《ROS Navigation Tuning Guide》中文翻译
+# _ROS Navigation Tuning Guide_ 中文翻译
 ==================
 
 ## Introduction
 
 **This is a Chinese translation of article**:
-Kaiyu Zheng, "ROS Navigation Tuning Guide", 2016.
+
+Kaiyu Zheng, "_*ROS Navigation Tuning Guide*_", 2016.
 
 - Original version is [here](http://kaiyuzheng.me/documents/papers/ros_navguide.pdf) (Type:pdf, English)
 - Chinese version is [here](RosNavTuningCn.pdf) (Type:pdf, 中文)
