@@ -1,5 +1,9 @@
-# _ROS Navigation Tuning Guide_ 中文翻译
+“_ROS Navigation Tuning Guide_” 中文翻译
 ==================
+
+《ROS Navigation Tuning Guide》(English)
+《ROS导航功能调优指南》(Chinese)
+
 
 ## Introduction
 

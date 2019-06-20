@@ -4,7 +4,7 @@
 \documentclass[lang=cn, zihao =-4]{elegantpaper}
 \input{sections/preamble.tex}
 
-\title{ROS导航功能包调优指南\thanks{本文是``ROS Navigation Tuning Guide''的中文翻译。英文原版：\url{http://kaiyuzheng.me/documents/papers/ros_navguide.pdf}}}
+\title{ROS导航功能调优指南\thanks{本文是``ROS Navigation Tuning Guide''的中文翻译。英文原版：\url{http://kaiyuzheng.me/documents/papers/ros_navguide.pdf}}}
 \author{{\kaishu 原作}：郑开宇\thanks{Email: kaiyu\_zheng [at] brown [dot] edu}\\
 {\kaishu 翻译}：罗辉武\thanks{Email: huiwu.luo@aliyun.com}}
 
@@ -14,26 +14,26 @@
 
 % 不需要版本信息，直接注释即可
 \version{0.01}
-% 不需要时间信息的话，需要把 \today 删除。
+% 不需要时间信息的话，直接注释即可
 \date{2019年06月19日\footnote{更新：2019年04月08日(增加了\texttt{amcl}的内容)}}
 
 \addbibresource[location=local]{bibdata.bib}
 \begin{document}
 {
-	\pdfbookmark[0]{首页}{label:frontpage}%
+	\pdfbookmark[1]{首页}{label:frontpage}%
 	\maketitle
 }
 
 \begin{abstract}
 \normalsize
-\indent ROS导航功能包适用于实现移动机器人可靠移动。
-ROS导航功能包通过处理里程、传感器和环境地图的数据，为机器人运动生成一条安全的路径。
-最大限度地优化导航功能包的性能需要对参数进行调整，且调参这项工作并不像表面上的那么简单。
+\indent ROS导航功能包用于实现移动机器人可靠移动。
+ROS导航功能包通过处理里程数据、传感器数据和环境地图数据，为机器人运动生成一条安全的路径。
+最大限度地优化导航功能包的性能需要对相关参数进行调整，且调参这项工作并不像表面上的那么简单。
 对其中的概念和推理不熟悉的人很大概率会采用随机尝试的策略，无形中浪费了大量时间。
 
 本文旨在通过调整导航参数的过程指导读者。
-当读者在设置关键参数的时候需要解答“如何设置”及“为什么这样设置”这些疑问时，本文可以作为一份参考材料。
-本文假设读者已对导航功能包进行了正确的设置，并准备进行优化。
+当读者在设置关键参数的时候需要解答“如何设置”以及“为什么这么设置”这些疑问时，本文可以作为一份参考材料。
+本文假设读者已对导航功能包进行了基本的安装设置，并准备对其进行优化。
 本文亦是我使用ROS导航功能包进行工作时的一份工作总结。
 \end{abstract}
 
