@@ -116,7 +116,7 @@ citestyle=gb7714-2015,backref=true%%其中后端backend使用biber
 	stepnumber = 1,
 	%numbersep=5pt, 
 	tabsize=4,%4
-	frame={lines},%lines, %{leftline,topline},%{leftline,topline,bottomline},
+	frame=leftline, %{lines},%lines, %{leftline,topline},%{leftline,topline,bottomline},
 	rulecolor=\color{BurntOrange},%\color{green},%\color{LightRubineRed}, ForestGreen
 	framerule=1pt,
 	%highlightcolor, %default: LightCyan
@@ -185,7 +185,7 @@ citestyle=gb7714-2015,backref=true%%其中后端backend使用biber
 \setmintedinline[bash]{
 	breaklines,
 	breakanywhere,
-	bgcolor=magenta!10, %colorbgdark,%showspaces,
+	bgcolor=colorbg,%magenta!10, %colorbgdark,%showspaces,
 	autogobble,
 	%	fontsize=\normalsize,
 	%frame=none,
@@ -197,11 +197,11 @@ citestyle=gb7714-2015,backref=true%%其中后端backend使用biber
 	linenos, 
 	xleftmargin=8pt,
 	breaklines=true,
-	frame=leftline,
+	frame={leftline},
 	rulecolor=\color{darkviolet},
 	framesep=2mm,
 	framerule=2pt,
-	breaksymbolleft={},
+	%breaksymbolleft={},
 }
 \setmintedinline[xml]{
 	bgcolor=colorbg, 

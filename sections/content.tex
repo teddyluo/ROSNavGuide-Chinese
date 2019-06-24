@@ -600,7 +600,7 @@ Pronobis博士认为，最佳代价图的衰减曲线应为斜率相对较低的
 
 \noindent SICK LMS 200:
 %\lstset{language=json}
-\begin{minted}{xml}
+\begin{minted}[frame={leftline},]{xml}
 {   
 "range_min": 0.0,
 "range_max": 81.0,
@@ -614,7 +614,7 @@ Pronobis博士认为，最佳代价图的衰减曲线应为斜率相对较低的
 
 \noindent SICK LMS 291:
 %\lstset{language=json}
-\begin{minted}{xml}
+\begin{minted}[frame={leftline},]{xml}
 {   
 "range_min": 0.0,
 "range_max": 81.0,
@@ -637,7 +637,7 @@ Pronobis博士认为，最佳代价图的衰减曲线应为斜率相对较低的
 对于\textbf{激光扫描模型}，默认的参数为：
 
 %\lstset{language=bash}
-\begin{minted}{xml}
+\begin{minted}[frame={leftline},]{xml}
 {
 "laser_z_hit": 0.5,
 "laser_sigma_hit": 0.2,
@@ -649,7 +649,7 @@ Pronobis博士认为，最佳代价图的衰减曲线应为斜率相对较低的
 为了改善机器人的定位精度，我们增加了\mintinline{bash}{laser_z_hit}和\mintinline{bash}{laser_sigma_hit}参数来引入更多噪音测量。最后的参数为：
 
 %\lstset{language=json}
-\begin{minted}{xml}
+\begin{minted}[frame={leftline},]{xml}
 {
 "laser_z_hit": 0.9,
 "laser_sigma_hit": 0.1,
@@ -676,7 +676,7 @@ Pronobis博士认为，最佳代价图的衰减曲线应为斜率相对较低的
 对于\textbf{里程计模型}，我们发现我们的里程计非常稳定。因此，我们调整了参数，便于算法假设里程计中的噪音很低：
 
 %\lstset{language=json}
-\begin{minted}{xml}
+\begin{minted}[frame={leftline},]{xml}
 {   
 "kld_err": 0.01,
 "kld_z": 0.99,
@@ -689,7 +689,7 @@ Pronobis博士认为，最佳代价图的衰减曲线应为斜率相对较低的
 
 为验证上述参数对运动模型是否有效，我们还尝试了一组受噪声污染的里程模型的建议参数：
 %\lstset{language=json}
-\begin{minted}{xml}
+\begin{minted}[frame={leftline},]{xml}
 {
 "kld_err": 0.10,
 "kld_z": 0.5',                                                                            
