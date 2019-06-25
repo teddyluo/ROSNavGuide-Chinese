@@ -307,21 +307,21 @@ DWA规划器依赖于提供障碍信息的代价图。因此，调整局部代�
 
 \subsubsection[DWA Local Planner: Other Parameters]{DWA局部规划器：其他参数}%{DWA Local Planner : Other Parameters}
 
-目标距离容差(Goal distance tolerance)：这些参数很直观，以下为它们在ROS Wiki上的描述：
+主要目标距离公差(Goal distance tolerance)：这些参数很直观，以下为它们在ROS Wiki上的描述\footnote{译者注：适当更改这些参数可解决机器人原地转圈的问题，例如\url{https://blog.csdn.net/Enterenvy/article/details/90699274}。}：
 
 \begin{itemize}
 	\item \mintinline{bash}{yaw_goal_tolerance} (double, 默认值: 0.05，单位：弧度)
 	%The tolerance in radians for the controller in yaw/rotation when achieving its goal.
-	到达目标点时，偏航/旋转中控制器的弧度容差(tolerance)。
+	到达目标点时，偏航/旋转中控制器的弧度公差(tolerance)。
 	
 	\item \mintinline{bash}{xy_goal_tolerance} (double, 默认值: 0.10，单位：米)
 	%The tolerance in meters for the controller in the x \& y distance when achieving a goal.
-	到达目标点时，控制器在x \& y方向的距离容差，单位为米。
+	到达目标点时，控制器在x \& y方向的距离公差，单位为米。
 	
 	\item \mintinline{bash}{latch_xy_goal_tolerance} (bool, 默认值: false) 
 	%If goal tolerance is latched, if the robot ever reaches the goal xy location it will simply rotate in place, even if it ends up outside the goal tolerance while it is doing so.
-	目标容差被锁定情况下，机器人到达目标的xy位置时会简单旋转到位；
-	如果机器人在目标容差(goal tolerance)范围之外进入结束状态时，也会简单旋转到位。
+	目标公差被锁定情况下，机器人到达目标的xy位置时会简单旋转到位；
+	如果机器人在目标公差(goal tolerance)范围之外进入结束状态时，也会简单旋转到位。
 	
 \end{itemize}
 
@@ -331,7 +331,7 @@ DWA规划器依赖于提供障碍信息的代价图。因此，调整局部代�
 \begin{itemize}
 	\item \mintinline{bash}{oscillation_reset_dist} (double, 默认值: 0.05， 单位：米) 
 	%How far the robot must travel in meters before oscillation flags are reset.
-	在振荡标志复位前，机器人必须以米为单位行走多远。
+	机器人必须运动多少米远后才能复位震荡标记。即：来回运动在多大距离以上不会被认为是振荡。
 \end{itemize}
 
 
@@ -484,7 +484,7 @@ Pronobis博士认为，最佳代价图的衰减曲线应为斜率相对较低的
 	\item \mintinline{bash}{raytrace_range}: 
 	%The default range in meters at which to raytrace out obstacles from the map using sensor data. This can be over-ridden on a per-sensor basis.
 	%用于使用传感器数据在地图中扫描出障碍物，以米为单位，可以在每个传感器的基础上进行覆盖
-	使用传感器数据从地图中光线追踪障碍物的默认范围（以米为单位）。 同样，该值可以在每个传感器的基础上被覆盖。
+	使用传感器数据从地图中扫描出障碍物的最大距离范围（以米为单位）。 同样，该值可以在每个传感器的基础上进行覆盖。
 	
 \end{itemize}
 
@@ -503,13 +503,13 @@ Pronobis博士认为，最佳代价图的衰减曲线应为斜率相对较低的
 	每个垂直列中的体素数目，网格的高度为\mintinline{bash}{z_resolution * z_voxels}。
 	
 	\item \mintinline{bash}{unknown_threshold}: 
-	The number of unknown cells allowed in a column considered to be "known"
-	整列认为是“已知”(``known'')的时候，含有的未知单元(“unknown”)的最大数量。
+%	The number of unknown cells allowed in a column considered to be "known"
+	当整列的voxel是“已知”(``known'')的时候，含有的未知cell(“unknown”)的最大数量。
 	
 	\item \mintinline{bash}{mark_threshold}: 
 	%	The maximum number of marked cells allowed in a column considered to be "free".
 	%	在被认为是“自由”的列中允许的标记单元的最大数量
-	整列被认为是“自由”("free")的时候，含有的标记单元(“marked”)的最大数目。
+	整列voxel认为是“自由”("free")的时候，含有的已标记的cell(“marked”)的最大数目。
 	
 \end{itemize}
 
@@ -740,7 +740,7 @@ ROS导航最灵活的特性之一是动态重新配置，因为不同的参数�
 
 \textbf{示例}：
 我们在实验中观察到的一种情况是机器人常常会脱离全局路径，即使没有必要这么做或者这样做会带来不好的结果。
-因此我们增加了路径距离偏差\mintinline{bash}{path_distance_bias}。由于大的路径距离偏差值\mintinline{bash}{path_distance_bias}将使机器人遵循全局路径，但实际上由于容差的原因机器人并不会最终到达目标点，我们需要一种方法让机器人毫不犹豫地达到目标点。
+因此我们增加了路径距离偏差\mintinline{bash}{path_distance_bias}。由于大的路径距离偏差值\mintinline{bash}{path_distance_bias}将使机器人遵循全局路径，但实际上由于公差的原因机器人并不会最终到达目标点，我们需要一种方法让机器人毫不犹豫地达到目标点。
 此时，我们动态减少路径距离偏差\mintinline{bash}{path_distance_bias}，以便在机器人接近目标点时强调\mintinline{bash}{goal_distance_bias}。
 毕竟，做更多的实验是为了找到解决问题的方法。
 
